@@ -29,3 +29,9 @@ let loop filename () =
   lexbuf.lex_curr_p <- { lexbuf.lex_curr_p with pos_fname = filename };
   parse_and_print lexbuf;
   In_channel.close inx
+
+open Core
+
+let%expect_test "addition" =
+  printf "%d" (1 + 2);
+  [%expect {| 3 |}]
