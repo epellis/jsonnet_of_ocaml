@@ -1,3 +1,11 @@
 (library
  (name lib)
- (libraries base))
+ (libraries base core))
+
+(ocamllex
+ (modules lexer))
+
+(menhir
+ (modules parser)
+ (infer false))
+

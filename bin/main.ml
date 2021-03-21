@@ -1,7 +1,23 @@
 open Lib
+open Core
+open Lexing
+
+let rec parse_and_print lexbuf =
+  match Lib.Json_parser.parse_with_error lexbuf with
+  | Some value ->
+      printf "%a\n" Json_types.output_value value;
+      parse_and_print lexbuf
+  | None -> ()
+
+let loop filename () =
+  let inx = In_channel.create filename in
+  let lexbuf = Lexing.from_channel inx in
+  lexbuf.lex_curr_p <- { lexbuf.lex_curr_p with pos_fname = filename };
+  parse_and_print lexbuf;
+  In_channel.close inx
 
 let () =
-  let result = Math.add 2 3 in
-  print_endline (string_of_int result);
-  let result = Math.sub 3 1 in
-  print_endline (string_of_int result)
+  Command.basic_spec ~summary:"Parse and display JSON"
+    Command.Spec.(empty +> anon ("filename" %: string))
+    loop
+  |> Command.run
