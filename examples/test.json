@@ -1,14 +1,16 @@
-{
-  "Hello": {
-    "World": {
-      "A": [
-        1,
-        2,
-        3,
-        4
-      ],
-      "B": "B",
-      "C": null
-    }
-  }
-}
+[
+  "Hello",
+  "World",
+  {
+    "Contents": "1"
+  },
+  null,
+  true,
+  false,
+  [
+    [
+      [],
+      []
+    ]
+  ]
+]

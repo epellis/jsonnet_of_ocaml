@@ -5,7 +5,7 @@ open Lexing
 let rec parse_and_print lexbuf =
   match Lib.Json_parser.parse_with_error lexbuf with
   | Some value ->
-      printf "%a\n" Json_types.output_value value;
+      printf "%s\n" (Json_output.to_string value);
       parse_and_print lexbuf
   | None -> ()
 
